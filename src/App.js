@@ -70,6 +70,7 @@ function App() {
         <Text className="Game-ID">Game ID: {gameId}</Text>
       </div>
       <Dialog hidden={!bingo || ignore} dialogContentProps={{ type: DialogType.largeHeader, title: "BINGO" }}>
+        Make sure you tell techienick on stream.<br />He will check the options and confirm
         <DialogFooter>
           <DefaultButton text="Close" onClick={() => setIgnore(true) } />
           <PrimaryButton text="New Bingo Card" onClick={() => fillGrid()} />

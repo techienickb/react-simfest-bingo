@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# Simfest Bingo ReactApp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+![Simfest bingo gif](simfest-bingo.gif)
+
+Generates a bingo card based on an array.
+
+Uses Microsoft's FluentUI react controls
+
+## Adding Additional Card Options
+
+Edit /src/App.js and add the items to the data constant variable.  The first item in the array is the FREE option that appears at the middle of the bingo card
+
+```javascript
+const data = [ 'Free', 'some option', 'some other option']
+```
 
 ## Available Scripts
 
@@ -44,27 +58,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
