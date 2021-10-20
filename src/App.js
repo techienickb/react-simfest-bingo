@@ -2,7 +2,7 @@ import logo from './Logo.png';
 import './App.css';
 import { MessageBar, PrimaryButton, MessageBarType, Stack, Text, DefaultButton, Dialog, DialogType, DialogFooter } from '@fluentui/react';
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function App() {
   initializeIcons();
@@ -19,7 +19,7 @@ function App() {
     "Horgy's height 📏", "Go-around 🛫", "Hold 🔁", "Pot of pleasure, Urn of joy", "This is nice", "Simon Kelsey Brief", "Smug look 😏", "Simon is doing that",
     "The RIM 🕳️", "Butter 🧈", "The litter picker landing 🛬", "Blindfolded landing 🧑‍🦯", 'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶'
   ];
-  const fillGrid = () => {
+  const fillGrid = useCallback(() => {
     setGameId(Math.round(new Date().getTime() / 900000));
     setIgnore(false);
     let g = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
@@ -33,12 +33,14 @@ function App() {
         }
       }
     setGrid(g);
-  };
+  }, [data.length]);
+
   useEffect(() => {
     fillGrid();
-  }, []);
+  }, [fillGrid]);
 
   const check = (x, y) => {
+    if (x === 2 && y === 2) return;
     let g = [...grid ];
     g[y][x].checked = !g[y][x].checked
     setGrid(g);
