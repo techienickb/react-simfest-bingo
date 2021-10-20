@@ -1,6 +1,6 @@
 import logo from './Logo.png';
 import './App.css';
-import { MessageBar, PrimaryButton, MessageBarType, Stack, Text, DefaultButton, Dialog, DialogType, RGBA_REGEX, DialogFooter } from '@fluentui/react';
+import { MessageBar, PrimaryButton, MessageBarType, Stack, Text, DefaultButton, Dialog, DialogType, DialogFooter } from '@fluentui/react';
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import { useEffect, useState } from 'react';
 
