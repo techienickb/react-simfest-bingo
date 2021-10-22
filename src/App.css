@@ -15,7 +15,7 @@
   flex-direction:row;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 2vw;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -38,12 +38,34 @@
   height: 15vh;
   line-height: 15vh;
   font-size: 2vh;
+  overflow: hidden;
+}
+
+.Slot span {
+  text-overflow: ellipsis;
 }
 
 .Game-ID {
   position: absolute;
-  top: 20.4vh;
+  top: 20.8vh;
   height: 3vh;
-  right: 5vw;
-  font-size: calc(14px + 0.4vmin)
+  right: 2vw;
+  font-size: calc(12px + 0.4vmin)
+}
+
+@media only screen and (max-width: 400px) {
+  .App-logo {
+    height: 50%;
+  }
+  .App-header button {
+    margin-bottom: 0;
+  }
+  .Game-ID {
+    font-size: 12px;
+    top: 21.1vh;
+    right: 1vw;
+  }
+  .Slot {
+    font-size: 1.3vh;
+  }
 }

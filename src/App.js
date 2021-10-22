@@ -1,11 +1,9 @@
 import logo from './Logo.png';
 import './App.css';
 import { MessageBar, PrimaryButton, MessageBarType, Stack, Text, DefaultButton, Dialog, DialogType, DialogFooter } from '@fluentui/react';
-import { initializeIcons } from '@fluentui/font-icons-mdl2';
 import { useCallback, useEffect, useState } from 'react';
 
 function App() {
-  initializeIcons();
   const [grid, setGrid] = useState([]);
   const [gameId, setGameId] = useState(0);
   const [ignore, setIgnore] = useState(false);
@@ -63,18 +61,18 @@ function App() {
         <img src={logo} className="App-logo" alt="Simfest Logo" />
         <Stack>
           <h1>Bingo</h1>
-          <PrimaryButton text="New Bingo Card" onClick={() => fillGrid()} />
+          <PrimaryButton text="New Card" onClick={() => fillGrid()} />
         </Stack>
       </header>
       <div className="App-body">
-        <MessageBar messageBarType={MessageBarType.severeWarning} style={{fontSize: 'calc(14px + 0.4vmin)' }}>Make sure the game id is active on stream</MessageBar>
+        <MessageBar messageBarType={MessageBarType.severeWarning} style={{fontSize: 'calc(12px + 0.4vmin)' }}>Make sure the game id is active on stream</MessageBar>
         <Text className="Game-ID">Game ID: {gameId}</Text>
       </div>
       <Dialog hidden={!bingo || ignore} dialogContentProps={{ type: DialogType.largeHeader, title: "BINGO" }}>
         Make sure you tell techienick on stream.<br />He will check the options and confirm
         <DialogFooter>
           <DefaultButton text="Close" onClick={() => setIgnore(true) } />
-          <PrimaryButton text="New Bingo Card" onClick={() => fillGrid()} />
+          <PrimaryButton text="New Card" onClick={() => fillGrid()} />
         </DialogFooter>
       </Dialog>
       <Stack tokens={{childrenGap: -1}} styles={{ alignItems: 'center', justifyContent: 'center' }} >
