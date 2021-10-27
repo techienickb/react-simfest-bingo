@@ -1,6 +1,6 @@
 import logo from './Logo.png';
 import './App.css';
-import { MessageBar, PrimaryButton, MessageBarType, Stack, Text, DefaultButton, Dialog, DialogType, DialogFooter } from '@fluentui/react';
+import { PrimaryButton, Stack, Text, DefaultButton, Dialog, DialogType, DialogFooter } from '@fluentui/react';
 import { useCallback, useEffect, useState } from 'react';
 
 function App() {
@@ -11,15 +11,16 @@ function App() {
   const cols = 5;
   const data = [
     '✈️ Free 🌟', 'Pleasing', 'Lovely scenery 🏔️', 'Willy waving', 'Flamingo 🦩', 'Pink ❣️', 'Vetis cabin service manager', "I'm a pilot 🧑‍✈️", 'Airbus', 'Maintenance required 🔧',
-    'The Lullaby trust will not be happy with that', 'The Lullaby trust will be happy with that', 'Simfest atc truck', 'Only on Vatsim', 'Booze Cruise 🍸',
+    'The Lullaby trust will not be happy with that', 'The Lullaby trust will be happy with that', 'Simfest ATC truck', 'Only on Vatsim', 'Booze Cruise 🍸',
     'Dick in the rear', 'Hot tub 💦', 'An incident has occurred', 'Diplomatic Incident 🚫', 'UMT (Uninvited Male Touching)', 'ALEXA Shut Up 🙊', "Benny's Happy 😄",
     "Benny's Grumpy 😠", 'Give Away', "PSX issue (if you get this I'm sorry)", 'Raid', 'simfestprizes@gmail.com', 'Gary that smells awful ☣️', 'GET OUT', 
     "Horgy's height 📏", "Go-around 🛫", "Hold 🔁", "Pot of pleasure, Urn of joy", "This is nice", "Simon Kelsey Brief", "Smug look 😏", "Simon is doing that",
     "The RIM 🕳️", "Butter 🧈", "The litter picker landing 🛬", "Blindfolded landing 🧑‍🦯", 'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶',
     'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call'
   ];
+  
   const fillGrid = useCallback(() => {
-    setGameId(Math.round(new Date().getTime() / 900000));
+    setGameId(Math.round(new Date().getTime() / 3600000));
     setIgnore(false);
     let g = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
     for (let y = 0; y < rows; y++)
@@ -64,12 +65,16 @@ function App() {
           <PrimaryButton text="New Card" onClick={() => fillGrid()} />
         </Stack>
       </header>
-      <div className="App-body">
-        <MessageBar messageBarType={MessageBarType.severeWarning} style={{fontSize: 'calc(12px + 0.4vmin)' }}>Make sure the game id is active on stream</MessageBar>
-        <Text className="Game-ID">Game ID: {gameId}</Text>
-      </div>
+      <Text className="Game-ID">Game ID: {gameId}</Text>
       <Dialog hidden={!bingo || ignore} dialogContentProps={{ type: DialogType.largeHeader, title: "BINGO" }}>
-        Make sure you tell techienick on stream.<br />He will check the options and confirm
+        <Stack tokens={{childrenGap: 5 }}>
+          <span>Make sure you tell a mod on stream with the code below.</span>
+          <span>They will check the options and confirm.</span>
+          <Stack horizontal tokens={{childrenGap: 5 }}>
+            <span>Code:</span>
+            <span>{ (grid.map(row => row.filter(_c => _c.checked).map(col => col.id.toString().padStart(2, 0)).join('.')).join('.').replace('..', '').replace('..', '')) }</span>
+          </Stack>
+        </Stack>
         <DialogFooter>
           <DefaultButton text="Close" onClick={() => setIgnore(true) } />
           <PrimaryButton text="New Card" onClick={() => fillGrid()} />

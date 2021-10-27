@@ -47,9 +47,10 @@
 
 .Game-ID {
   position: absolute;
-  top: 20.8vh;
+  top: 15vh;
   height: 3vh;
-  right: 2vw;
+  color: #fff;
+  right: 49vw;
   font-size: calc(12px + 0.4vmin)
 }
 
@@ -62,8 +63,7 @@
   }
   .Game-ID {
     font-size: 12px;
-    top: 21.1vh;
-    right: 1vw;
+    right: 40vw;
   }
   .Slot {
     font-size: 1.3vh;
