@@ -63,7 +63,7 @@ function App() {
     }
     fillGrid();
     return () => { if (connection && connection.connectionStarted) connection.connection.hub.stop(); };
-  }, []);
+  }, [connection, fillGrid]);
 
   const isWinnerCheck = useCallback((isWinner) => {
     console.log("check winner", isWinner, grid);
