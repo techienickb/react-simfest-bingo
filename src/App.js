@@ -68,7 +68,7 @@ function App() {
   const isWinnerCheck = useCallback((isWinner) => {
     console.log("check winner", isWinner, grid);
     let counter = 0;
-    isWinner.ids.filter(_id => _id > 0).forEach(_id => { if (grid[_id - 1].checked) counter++; } );
+    isWinner.ids.filter(_id => _id > 0).forEach(_id => { try { if (grid[_id - 1].checked) counter = counter + 1; } catch (exc) {} } );
     console.debug("Counter", counter);
     if (counter > 3) { 
       console.log("winner");
