@@ -6,14 +6,14 @@ import ReactCanvasConfetti from 'react-canvas-confetti';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 const data = [
-  '✈️ Free 🌟', 'Pleasing', 'Lovely scenery 🏔️', 'Willy waving', 'Flamingo 🦩', 'Pink ❣️', 'Vetis cabin service manager', "I'm a pilot 🧑‍✈️", 'Airbus', 'Maintenance required 🔧',
+  '✈️ Free 🌟', 'Pleasing', 'Lovely scenery 🏔️', 'Willy waving', 'Flamingo 🦩', 'Pink ❣️', 'Yetis cabin service manager', "I'm a pilot 🧑‍✈️", 'Airbus', 'Maintenance required 🔧',
   'The Lullaby trust will not be happy with that', 'The Lullaby trust will be happy with that', 'Simfest ATC truck', 'Only on Vatsim', 'Booze Cruise 🍸',
   'Dick in the rear', 'Hot tub 💦', 'An incident has occurred', 'Diplomatic Incident 🚫', 'UMT (Uninvited Male Touching)', 'ALEXA Shut Up 🙊', "Happy 😄",
-  "Grumpy 😠", 'Give Away', "PSX issue (if you get this I'm sorry)", 'Raid', 'simfestprizes@gmail.com', 'That smells awful ☣️', 'GET OUT', 
-  "Horgy's height 📏", "Go-around 🛫", "Hold 🔁", "Pot of pleasure, Urn of joy", "This is nice", "Simon Kelsey Brief", "Smug look 😏", "Someone is doing that",
-  "The RIM 🕳️", "Butter 🧈", "The litter picker landing 🛬", "Blindfolded landing 🧑‍🦯", 'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶',
-  'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call', 'On time departure ⏳', 'On time arrival ⌛',
-  'Has anyone checked the wings for ice? ❄️', 'Fatal Damage 💥', 'Throffy coffee ☕', 'Someone can\'t see/no contacts'
+  "Grumpy 😠", 'Give Away', 'Raid', 'simfestprizes@gmail.com', 'That smells awful ☣️', 'GET OUT', 'Pass the QRH', "Horgy's height 📏", "Go-around 🛫", "Hold 🔁", 
+  "Pot of pleasure, Urn of joy", "This is nice", "Simon Kelsey Brief", "Smug look 😏", "Someone is doing that", "Butter 🧈", "Floater 🛬", "Blindfolded landing 🧑‍🦯", 
+  'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶', 'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call',
+  'Has anyone checked the wings for ice? ❄️', 'Fatal Damage 💥', 'Throffy coffee ☕', 'Someone can\'t see/no contacts', 'Beep Beep Beep', 'What can Horgy reach',
+  'Moist ☔', 'Merch Daddy', 'Muff 🙊', 'Give-away Daddy 🎁'
 ];
 
 function App() {
