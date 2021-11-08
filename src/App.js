@@ -26,6 +26,8 @@ function App() {
   const [connection, setConnection] = useState(null);
   const [verifiedWinner, setVerified] = useState(0);
   const [twitch, setTwitch] = useState("");
+  const gridRef = useRef();
+  gridRef.current = grid;
   
   const fillGrid = useCallback(() => {
     setGameId(Math.round(new Date().getTime() / 3600000));
@@ -66,16 +68,16 @@ function App() {
   }, [connection, fillGrid]);
 
   const isWinnerCheck = useCallback((isWinner) => {
-    console.log("check winner", isWinner, grid);
+    console.log("check winner", isWinner, gridRef.current);
     let counter = 0;
-    isWinner.ids.filter(_id => _id > 0).forEach(_id => { try { if (grid[_id - 1].checked) counter = counter + 1; } catch (exc) {} } );
+    isWinner.ids.filter(_id => _id > 0).forEach(_id => { if (gridRef.current[_id - 1].checked) counter++; } );
     console.debug("Counter", counter);
     if (counter > 3) { 
       console.log("winner");
       connection.invoke('Winner', isWinner.connectionId);
       alert(`${isWinner.name} has won, please start a new game`);
     } else connection.invoke("NotWinner", isWinner.connectionId);
-  }, [connection, grid]);
+  }, [connection, gridRef]);
 
   useEffect(() => {
     if (connection && !connection.connectionStarted) {
