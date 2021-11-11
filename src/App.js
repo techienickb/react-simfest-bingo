@@ -76,7 +76,8 @@ function App() {
     if (counter > 3) {
       connection.invoke('Winner', isWinner.connectionId);
       setAdminWin(isWinner);
-      alert(`${isWinner.name} has won, please start a new game`);
+      if (Notification.permission === "granted") new Notification("We have a winner");
+      else if (Notification.permission !== "denied") Notification.requestPermission().then((permission) => { if (permission === "granted") new Notification("We have a winner"); });
     } else connection.invoke("NotWinner", isWinner.connectionId);
   }, [connection, gridRef]);
 
@@ -140,7 +141,7 @@ function App() {
       nextAnimation();
       counter++;
       if (counter < 10) _int = setTimeout(timeout, 1000);
-      else { clearTimeout(_int); _int = null; }
+      else { clearTimeout(_int); _int = null; setVerified(0); }
     }
     timeout();
   }
@@ -176,7 +177,7 @@ function App() {
         <Stack tokens={{ childrenGap: 5 }}>
           <Stack horizontal tokens={{ childrenGap: 5 }}><Text>Winner: </Text><Text>{adminWin.name}</Text></Stack>
           <Text>Winning Phrases</Text>
-          {adminWin && adminWin.ids.filter(_id => _id > 0).map(_id => gridRef.current[_id - 1].checked && <Text key={`win${_id}`}>{grid[_id - 1]}</Text>)}
+          {adminWin && adminWin.ids.filter(_id => _id > 0).map(_id => gridRef.current[_id - 1].checked && <Text key={`win${_id}`}>{data[_id]}</Text>)}
         </Stack>
         <DialogFooter>
           <DefaultButton text="Close" onClick={() => setAdminWin(null)} />
