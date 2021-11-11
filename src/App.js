@@ -172,7 +172,7 @@ function App() {
           {grid.map(_d => <Checkbox key={_d.id} label={`${_d.id} - ${data[_d.id]}`} checked={_d.checked} onChange={(e, checked) => adminCheck(_d.id, checked)} styles={{ root: { margin: 5 } }} />)}
         </div>
       }
-      {adminWin && <Dialog dialogContentProps={{ type: DialogType.largeHeader, title: "Someone has got Bingo" }}>
+      {adminWin !== null && <Dialog hidden={false} dialogContentProps={{ type: DialogType.largeHeader, title: "Someone has got Bingo" }}>
         <Stack tokens={{ childrenGap: 5 }}>
           <Stack horizontal tokens={{ childrenGap: 5 }}><Text>Winner: </Text><Text>{adminWin.name}</Text></Stack>
           <Text>Winning Phrases</Text>
