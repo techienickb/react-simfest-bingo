@@ -33,6 +33,42 @@
   padding-bottom: 2px;
 }
 
+.stack {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: 'nowrap';
+  gap: 5px;
+  width: auto;
+}
+
+.stackHoz {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.stretch {
+  align-items: stretch;
+}
+
+.spaceEven {
+  justify-content: space-evenly;
+}
+
+.spaceAround {
+  justify-content: space-around;
+}
+
+.spaceBetween {
+  justify-content: space-between;
+}
+
 .Slot {
   width: 15vw;
   height: 15vh;

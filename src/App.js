@@ -1,9 +1,10 @@
 import logo from './Logo.png';
 import './App.css';
-import { PrimaryButton, Stack, Text, DefaultButton, Dialog, DialogType, DialogFooter, Spinner, SpinnerSize, TextField, Checkbox } from '@fluentui/react';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import { Button, FluentProvider, webDarkTheme, webLightTheme, Text, Checkbox, ToggleButton, Spinner, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions } from '@fluentui/react-components';
+import { InputField } from '@fluentui/react-components/unstable';
 
 const data = [
   '✈️ Free 🌟', 'Pleasing', 'Lovely scenery 🏔️', 'Willy waving', 'Flamingo 🦩', 'Pink ❣️', 'Yetis cabin service manager', "I'm a pilot 🧑‍✈️", 'Airbus', 'Maintenance required 🔧',
@@ -14,7 +15,7 @@ const data = [
   'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶', 'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call',
   'Has anyone checked the wings for ice? ❄️', 'Fatal Damage 💥', 'Throffy coffee ☕', 'Someone can\'t see/no contacts', 'Beep Beep Beep', 'What can Horgy reach',
   'Moist ☔', 'Merch Daddy 🎁👴', 'Muff 🙊', 'Give-away Daddy 🎁', 'Has Horgy finished his sim yet? ⏲️', 'Importing/exporting metal tubes ↔️', 'Horgy sound board 🗣️',
-  "We've broken someone", 'Anti-Faff', 'Faff', 'VRB ⚡',  'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔'
+  "We've broken someone", 'Anti-Faff', 'Faff', 'VRB ⚡', 'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔', 'Dusit Thani 🏨', 'Telex 📃'
 ];
 
 function App() {
@@ -29,7 +30,17 @@ function App() {
   const [verifiedWinner, setVerified] = useState(0);
   const [twitch, setTwitch] = useState("");
   const gridRef = useRef();
+  const [darkMode, setDarkMode] = useState(false);
   gridRef.current = grid;
+
+  useEffect(() => {
+    console.log("Checking dark mode", window?.matchMedia('(prefers-color-scheme: dark)')?.matches === true);
+    window?.matchMedia('(prefers-color-scheme: dark)')?.addEventListener('change', e => setDarkMode(e.matches === true));
+    setDarkMode(window?.matchMedia('(prefers-color-scheme: dark)')?.matches === true);
+    return () => {
+      window?.matchMedia('(prefers-color-scheme: dark)')?.removeEventListener('change', () => { });
+    }
+  }, []);
 
   const fillGrid = useCallback(() => {
     setGameId(Math.round(new Date().getTime() / 3600000));
@@ -84,7 +95,7 @@ function App() {
   useEffect(() => {
     if (connection && !connection.connectionStarted) {
       connection.start()
-        .then(result => {
+        .then(() => {
 
           if (window.location.pathname !== '/admin') {
             connection.on('NewGame', () => {
@@ -159,58 +170,74 @@ function App() {
   if (bingo && verifiedWinner === 2 && !ignore) fire();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="Simfest Logo" />
-        <Stack>
-          <h1>Bingo</h1>
-          <PrimaryButton text={window.location.pathname === '/admin' ? "New Game" : "New Card"} onClick={() => fillGrid()} />
-        </Stack>
-      </header>
-      <Text className="Game-ID">Game ID: {gameId}</Text>
-      {window.location.pathname === '/admin' &&
-        <div style={{ columns: '10vw 3', padding: 5 }}>
-          {grid.map(_d => <Checkbox key={_d.id} label={`${_d.id} - ${data[_d.id]}`} checked={_d.checked} onChange={(e, checked) => adminCheck(_d.id, checked)} styles={{ root: { margin: 5 } }} />)}
-        </div>
-      }
-      {adminWin !== null && <Dialog hidden={false} dialogContentProps={{ type: DialogType.largeHeader, title: "Someone has got Bingo" }}>
-        <Stack tokens={{ childrenGap: 5 }}>
-          <Stack horizontal tokens={{ childrenGap: 5 }}><Text>Winner: </Text><Text>{adminWin.name}</Text></Stack>
-          <Text>Winning Phrases</Text>
-          {adminWin && adminWin.ids.filter(_id => _id > 0).map(_id => gridRef.current[_id - 1].checked && <Text key={`win${_id}`}>{data[_id]}</Text>)}
-        </Stack>
-        <DialogFooter>
-          <DefaultButton text="Close" onClick={() => setAdminWin(null)} />
-        </DialogFooter>
-      </Dialog>}
-      {window.location.pathname !== '/admin' && <>
-        <Dialog hidden={!bingo || ignore} dialogContentProps={{ type: DialogType.largeHeader, title: "BINGO" }}>
-          <Stack tokens={{ childrenGap: 5 }}>
-            {verifiedWinner === 0 && <TextField label="Twitch Username" required onChange={(e, newVal) => setTwitch(newVal)} defaultValue={twitch} />}
-            {verifiedWinner === 1 && <>
-              <span>Please wait while we check you are a winner with an admin</span>
-              <span>If you don't get a confirmation then no admin is online</span>
-              <Spinner size={SpinnerSize.large} label="Checking win with an admin" />
-            </>}
-            {verifiedWinner === 2 && <span>BINGO! - Expect a £5 donation in your name</span>}
-            {verifiedWinner === 3 && <span>This is not a verified win, sorry</span>}
-          </Stack>
-          <DialogFooter>
-            <DefaultButton text="Close" onClick={() => setIgnore(true)} />
-            {verifiedWinner > 1 && <PrimaryButton text="New Card" onClick={() => fillGrid()} />}
-            {verifiedWinner === 0 && <PrimaryButton text="Check win" onClick={checkWin} />}
-          </DialogFooter>
-        </Dialog>
-        <ReactCanvasConfetti ref={confettiRef} style={{ position: 'fixed', zIndex: 1000001, pointerEvents: 'none', top: 0, left: 0, width: '100vw', height: '100vh' }} />
-        <Stack tokens={{ childrenGap: -1 }} styles={{ alignItems: 'center', justifyContent: 'center' }} >
-          {grid.map((row, y) =>
-            <Stack horizontal tokens={{ childrenGap: -1 }} key={y} style={{ alignItems: 'center', justifyContent: 'center' }}>
-              {row.map((col, x) => <DefaultButton key={`${y}-${x}`} toggle checked={col.checked} onClick={() => check(x, y)} className="Slot">{data[col.id]}</DefaultButton>)}
-            </Stack>
-          )}
-        </Stack>
-      </>}
-    </div>
+    <FluentProvider theme={darkMode ? webDarkTheme : webLightTheme }>
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="Simfest Logo" />
+          <div className='stack'>
+            <h1>Bingo</h1>
+            <Button appearance='primary' onClick={() => fillGrid()}>{window.location.pathname === '/admin' ? "New Game" : "New Card"}</Button>
+          </div>
+        </header>
+        <Text className="Game-ID">Game ID: {gameId}</Text>
+        {window.location.pathname === '/admin' &&
+          <div style={{ columns: '10vw 3', padding: 5 }}>
+            {grid.map(_d => <Checkbox key={_d.id} label={`${_d.id} - ${data[_d.id]}`} checked={_d.checked} onChange={(e, checked) => adminCheck(_d.id, checked)} styles={{ root: { margin: 5 } }} />)}
+          </div>
+        }
+        {adminWin !== null && <Dialog defaultOpen={true}>
+          <DialogSurface>
+            <DialogBody>
+              <DialogTitle>We have a winner</DialogTitle>
+              <DialogContent>
+                <div className='stack'>
+                  <div className='stackHoz'><Text>Winner: </Text><Text>{adminWin.name}</Text></div>
+                  <Text>Winning Phrases</Text>
+                  {adminWin && adminWin.ids.filter(_id => _id > 0).map(_id => gridRef.current[_id - 1].checked && <Text key={`win${_id}`}>{data[_id]}</Text>)}
+                </div>
+              </DialogContent>
+              <DialogActions>
+                <Button appearance="primary" onClick={() => setAdminWin(null)}>Close</Button>
+              </DialogActions>
+            </DialogBody>
+          </DialogSurface>
+        </Dialog>}
+        {window.location.pathname !== '/admin' && <>
+          <Dialog open={bingo && !ignore}>
+            <DialogSurface>
+              <DialogBody>
+                <DialogTitle>BINGO</DialogTitle>
+                <DialogContent>
+                  <div className='stack'>
+                    {verifiedWinner === 0 && <InputField label="Twitch Username" required onChange={(e, newVal) => setTwitch(newVal)} defaultValue={twitch} />}
+                    {verifiedWinner === 1 && <>
+                      <span>Please wait while we check you are a winner with an admin</span>
+                      <span>If you don't get a confirmation then no admin is online</span>
+                      <Spinner size='large' label="Checking win with an admin" />
+                    </>}
+                    {verifiedWinner === 2 && <span>BINGO! - Expect a £5 donation in your name</span>}
+                    {verifiedWinner === 3 && <span>This is not a verified win, sorry</span>}
+                  </div>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => setIgnore(true)}>Close</Button>
+                  {verifiedWinner > 1 && <Button appearance='primary' onClick={() => fillGrid()}>New Card</Button>}
+                  {verifiedWinner === 0 && <Button appearance='primary' onClick={checkWin}>Check win</Button>}
+                </DialogActions>
+              </DialogBody>
+            </DialogSurface>
+          </Dialog>
+          <ReactCanvasConfetti ref={confettiRef} style={{ position: 'fixed', zIndex: 1000001, pointerEvents: 'none', top: 0, left: 0, width: '100vw', height: '100vh' }} />
+          <div className='stack' style={{ alignItems: 'center', gap: 0, justifyContent: 'center' }}>
+            {grid.map((row, y) =>
+              <div className='stackHoz center' style={{ gap: 0 }} key={y}>
+                {row.map((col, x) => <ToggleButton key={`${y}-${x}`} checked={col.checked} onClick={() => check(x, y)} className="Slot">{data[col.id]}</ToggleButton>)}
+              </div>
+            )}
+          </div>
+        </>}
+      </div>
+    </FluentProvider>
   );
 }
 
