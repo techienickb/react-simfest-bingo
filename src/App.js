@@ -182,7 +182,7 @@ function App() {
         <Text className="Game-ID">Game ID: {gameId}</Text>
         {window.location.pathname === '/admin' &&
           <div style={{ columns: '10vw 3', padding: 5 }}>
-            {grid.map(_d => <Checkbox key={_d.id} label={`${_d.id} - ${data[_d.id]}`} checked={_d.checked} onChange={(e, checked) => adminCheck(_d.id, checked)} styles={{ root: { margin: 5 } }} />)}
+            {grid.map(_d => <Checkbox key={_d.id} label={`${_d.id} - ${data[_d.id]}`} checked={_d.checked} onChange={(e, data) => adminCheck(_d.id, data.checked)} style={{ display: 'flex' }} />)}
           </div>
         }
         {adminWin !== null && <Dialog defaultOpen={true}>
