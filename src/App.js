@@ -7,15 +7,15 @@ import { Button, FluentProvider, webDarkTheme, webLightTheme, Text, Checkbox, To
 import { InputField } from '@fluentui/react-components/unstable';
 
 const data = [
-  '✈️ Free 🌟', 'Pleasing', 'Lovely scenery 🏔️', 'Willy waving', 'Flamingo 🦩', 'Pink ❣️', 'Yetis cabin service manager', "I'm a pilot 🧑‍✈️", 'Airbus', 'Maintenance required 🔧',
-  'The Lullaby trust will not be happy with that ❌', 'The Lullaby trust will be happy with that ☑️', 'Simfest ATC truck', 'Only on Vatsim', 'Booze Cruise 🍸',
-  'Dick in the rear', 'Hot tub 💦', 'An incident has occurred', 'Diplomatic Incident 🚫', 'UMT (Uninvited Male Touching)', 'ALEXA Shut Up 🙊', "Happy 😄",
-  "Grumpy 😠", 'Give Away', 'Raid', 'That smells awful ☣️', 'GET OUT', 'Pass the QRH', "Horgy's height 📏", "Go-around 🛫", "Hold 🔁",
-  "Pot of pleasure, Urn of joy", "This is nice", "Simon Kelsey Brief", "Smug look 😏", "Someone is doing that", "Butter 🧈", "Floater 🛬", "Blindfolded landing 🧑‍🦯",
-  'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶', 'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call',
-  'Has anyone checked the wings for ice? ❄️', 'Fatal Damage 💥', 'Throffy coffee ☕', 'Someone can\'t see/no contacts', 'Beep Beep Beep', 'What can Horgy reach',
+  '✈️ Free 🌟', 'Pleasing 😌', 'Lovely scenery 🏔️', 'Willy waving', 'Flamingo 🦩', 'Pink ❣️', 'Yetis cabin service manager', "I'm a pilot 🧑‍✈️", 'Airbus', 'Maintenance required 🔧',
+  'The Lullaby trust will not be happy with that ❌', 'The Lullaby trust will be happy with that ☑️', 'Simfest ATC truck 🚚', 'Only on Vatsim', 'Booze Cruise 🍸',
+  'Dick in the rear', 'Hot tub 💦', 'An incident has occurred ⚠️', 'Diplomatic Incident 🚫', 'UMT (Uninvited Male Touching) 🫵', 'ALEXA Shut Up 🔇', 'Happy 😄',
+  'Grumpy 😠', 'Give Away', 'Raid', 'That smells awful ☣️', 'GET OUT', 'Pass the QRH', 'Horgy\'s height 📏', 'Go-around 🛫', 'Hold 🔁',
+  'Pot of pleasure, Urn of joy ⚱️', 'This is nice', 'Simon Kelsey Brief 😴', 'Smug look 😏', 'Someone is doing that', 'Butter 🧈', 'Floater 🛬', 'Blindfolded landing 🧑‍🦯',
+  'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶', 'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call ☎️',
+  'Has anyone checked the wings for ice? ❄️', 'Fatal Damage 💥', 'Throffy coffee ☕', "Someone can't see/no contacts", 'Beep Beep Beep 🔊', 'What can Horgy reach 🙋‍♂️',
   'Moist ☔', 'Merch Daddy 🎁👴', 'Muff 🙊', 'Give-away Daddy 🎁', 'Has Horgy finished his sim yet? ⏲️', 'Importing/exporting metal tubes ↔️', 'Horgy sound board 🗣️',
-  "We've broken someone", 'Anti-Faff', 'Faff', 'VRB ⚡', 'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔', 'Dusit Thani 🏨', 'Telex 📃'
+  "We've broken someone 🔧", 'Anti-Faff', 'Faff', 'VRB ⚡', 'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔', 'Dusit Thani 🏨', 'Telex 📃'
 ];
 
 function App() {
