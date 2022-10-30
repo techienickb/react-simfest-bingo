@@ -15,7 +15,7 @@ const data = [
   'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶', 'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call ☎️',
   'Has anyone checked the wings for ice? ❄️', 'Fatal Damage 💥', 'Throffy coffee ☕', "Someone can't see/no contacts", 'Beep Beep Beep 🔊', 'What can Horgy reach 🙋‍♂️',
   'Moist ☔', 'Merch Daddy 🎁👴', 'Muff 🙊', 'Give-away Daddy 🎁', 'Has Horgy finished his sim yet? ⏲️', 'Importing/exporting metal tubes ↔️', 'Horgy sound board 🗣️',
-  "We've broken someone 🔧", 'Anti-Faff', 'Faff', 'VRB ⚡', 'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔', 'Dusit Thani 🏨', 'Telex 📃'
+  "We've broken someone 🔧", 'Anti-Faff', 'Faff', 'VRB ⚡', 'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔', 'Dusit Thani 🏨', 'Telex 📃', 'Educational and informative 🎓'
 ];
 
 function App() {
