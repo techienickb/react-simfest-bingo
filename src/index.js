@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+if (window.location.pathname === '/claim') window.location = 'https://forms.office.com/r/BRj1Eu4RFn';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 
