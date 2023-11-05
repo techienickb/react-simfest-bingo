@@ -3,19 +3,19 @@ import './App.css';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import ReactCanvasConfetti from 'react-canvas-confetti';
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import { Button, FluentProvider, webDarkTheme, webLightTheme, Text, Checkbox, ToggleButton, Spinner, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions } from '@fluentui/react-components';
-import { InputField } from '@fluentui/react-components/unstable';
+import { Field, Button, FluentProvider, webDarkTheme, webLightTheme, Text, Checkbox, ToggleButton, Spinner, Dialog, DialogSurface, DialogBody, DialogTitle, DialogContent, DialogActions, Input } from '@fluentui/react-components';
 
 const data = [
   '✈️ Free 🌟', 'Pleasing 😌', 'Lovely scenery 🏔️', 'Willy waving', 'Flamingo 🦩', 'Pink ❣️', 'Yetis cabin service manager', "I'm a pilot 🧑‍✈️", 'Airbus', 'Maintenance required 🔧',
   'The Lullaby trust will not be happy with that ❌', 'The Lullaby trust will be happy with that ☑️', 'Simfest ATC truck 🚚', 'Only on Vatsim', 'Booze Cruise 🍸',
-  'Dick in the rear', 'Hot tub 💦', 'An incident has occurred ⚠️', 'Diplomatic Incident 🚫', 'UMT (Uninvited Male Touching) 🫵', 'ALEXA Shut Up 🔇', 'Happy 😄', 'Suite 🛏️',
+  'Hot tub 💦', 'An incident has occurred ⚠️', 'Diplomatic Incident 🚫', 'UMT (Uninvited Male Touching) 🫵', 'ALEXA Shut Up 🔇', 'Happy 😄', 'Suite 🛏️',
   'Grumpy 😠', 'Give Away', 'Raid', 'That smells awful ☣️', 'GET OUT', 'Pass the QRH', 'Horgy\'s height 📏', 'Go-around 🛫', 'Hold 🔁', 'Cilla Black 👩‍🎤', 'Noel Edmonds 🧔🏻‍♂️',
   'Pot of pleasure, Urn of joy ⚱️', 'This is nice', 'Simon Kelsey Brief 😴', 'Smug look 😏', 'Someone is doing that', 'Butter 🧈', 'Floater 🛬', 'Blindfolded landing 🧑‍🦯',
   'A playing of "don\'t show keith (or chat) your teeth"', 'Flaggpunsh 🍶', 'How much the Sim cost? 💸', 'Nothing to see here 🙈', 'Are you using MSFS?', 'Pardon ⁉️', 'Cabin Phone Call ☎️',
   'Has anyone checked the wings for ice? ❄️', 'Fatal Damage 💥', 'Throffy coffee ☕', "Someone can't see/no contacts", 'Beep Beep Beep 🔊', 'What can Horgy reach 🙋‍♂️',
   'Moist ☔', 'Merch Daddy 🎁👴', 'Muff 🙊', 'Give-away Daddy 🎁', 'Has Horgy finished his sim yet? ⏲️', 'Importing/exporting metal tubes ↔️', 'Horgy sound board 🗣️',
-  "We've broken someone 🔧", 'Anti-Faff', 'Faff', 'VRB ⚡', 'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔', 'Dusit Thani 🏨', 'Telex 📃', 'Educational and informative 🎓'
+  "We've broken someone 🔧", 'Anti-Faff', 'Faff', 'VRB ⚡', 'Captain Tailstrike 🛫', 'Colin 🐈', 'Dufrais', 'Baked Potato 🥔', 'Dusit Thani 🏨', 'Telex 📃', 'Educational and informative 🎓',
+  'Pingu 🐧', 'Admiral Tonks ⛵', 'Who\'s at the door?', 'Piss up 🥴', 'Ice 🧊', 'Broken printer 🖨️'
 ];
 
 function App() {
@@ -209,7 +209,7 @@ function App() {
                 <DialogTitle>BINGO</DialogTitle>
                 <DialogContent>
                   <div className='stack'>
-                    {verifiedWinner === 0 && <InputField label="Twitch Username" required onChange={(e, newVal) => setTwitch(newVal)} defaultValue={twitch} />}
+                    {verifiedWinner === 0 && <Field label="Twitch Username" required><Input required onChange={(e, newVal) => setTwitch(newVal)} defaultValue={twitch} /></Field>}
                     {verifiedWinner === 1 && <>
                       <span>Please wait while we check you are a winner with an admin</span>
                       <span>If you don't get a confirmation then no admin is online</span>
