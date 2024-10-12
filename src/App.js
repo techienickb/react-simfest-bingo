@@ -162,8 +162,8 @@ function App() {
 
   const checkWin = async () => {
     setVerified(1);
-    console.log("trigger send", connection.connectionStarted);
-    if (connection.connectionStarted) await connection.invoke('IsWinner', ids, twitch);
+    console.log("trigger send", connection._connectionStarted);
+    if (connection._connectionStarted) await connection.invoke('IsWinner', ids, twitch);
     else alert('No connection to server.');
   }
 
