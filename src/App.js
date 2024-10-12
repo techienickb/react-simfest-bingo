@@ -1,8 +1,8 @@
 import logo from "./Logo.png";
 import "./App.css";
 import { useCallback, useEffect, useState, useRef } from "react";
-import ReactCanvasConfetti from "react-canvas-confetti";
 import { HubConnectionBuilder } from "@microsoft/signalr";
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import {
   Field,
   Button,
@@ -103,14 +103,13 @@ const data = [
   "Piss up 🥴",
   "Ice 🧊",
   "Broken printer 🖨️",
-];
+].sort((a, b) => a.localeCompare(b));
 
 function App() {
   const [grid, setGrid] = useState([]);
   const [gameId, setGameId] = useState(0);
   const [ignore, setIgnore] = useState(false);
   const [adminWin, setAdminWin] = useState(null);
-  const confettiRef = useRef(null);
   const rows = 5;
   const cols = 5;
   const [connection, setConnection] = useState(null);
@@ -121,10 +120,6 @@ function App() {
   gridRef.current = grid;
 
   useEffect(() => {
-    console.log(
-      "Checking dark mode",
-      window?.matchMedia("(prefers-color-scheme: dark)")?.matches === true
-    );
     window
       ?.matchMedia("(prefers-color-scheme: dark)")
       ?.addEventListener("change", (e) => setDarkMode(e.matches === true));
@@ -144,11 +139,12 @@ function App() {
     setVerified(0);
     if (window.location.pathname === "/admin") {
       setGrid(data.slice(1).map((_d, _i) => ({ id: _i + 1, checked: false })));
-      if (connection && connection.connectionStarted) {
+      if (connection?._connectionStarted === true) {
         try {
           connection.invoke("SendNewGame");
+          console.debug("New game started");
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       }
     } else {
@@ -263,42 +259,6 @@ function App() {
 
   const bingo = window.location.pathname === "/admin" ? false : checkBingo();
 
-  const fire = () => {
-    let _int = null;
-    let counter = 0;
-    const nextAnimation = () => {
-      const getAnimationSettings = (originXA, originXB) => {
-        const randomInRange = (min, max) => {
-          return Math.random() * (max - min) + min;
-        };
-        return {
-          startVelocity: 30,
-          spread: 360,
-          ticks: 60,
-          zIndex: 0,
-          particleCount: 150,
-          origin: {
-            x: randomInRange(originXA, originXB),
-            y: Math.random() - 0.2,
-          },
-        };
-      };
-      confettiRef.current.confetti(getAnimationSettings(0.1, 0.3));
-      confettiRef.current.confetti(getAnimationSettings(0.7, 0.9));
-    };
-    const timeout = () => {
-      nextAnimation();
-      counter++;
-      if (counter < 10) _int = setTimeout(timeout, 1000);
-      else {
-        clearTimeout(_int);
-        _int = null;
-        setVerified(0);
-      }
-    };
-    timeout();
-  };
-
   let ids = [];
   if (window.location.pathname === "/")
     grid.forEach((row) =>
@@ -312,8 +272,6 @@ function App() {
       await connection.invoke("IsWinner", ids, twitch);
     else alert("No connection to server.");
   };
-
-  if (bingo && verifiedWinner === 2 && !ignore) fire();
 
   return (
     <AppInsightsContext.Provider value={reactPlugin}>
@@ -384,14 +342,14 @@ function App() {
               <Dialog open={bingo && !ignore}>
                 <DialogSurface>
                   <DialogBody>
-                    <DialogTitle>BINGO</DialogTitle>
+                    <DialogTitle>{verifiedWinner === 0 ? "BINGO Check" : verifiedWinner === 1 ? "Checking for win" : verifiedWinner === 2 ? "BINGO!" : "Not Bingo" }</DialogTitle>
                     <DialogContent>
                       <div className="stack">
                         {verifiedWinner === 0 && (
                           <Field label="Twitch Username" required>
                             <Input
                               required
-                              onChange={(e, newVal) => setTwitch(newVal)}
+                              onChange={(e, newVal) => setTwitch(newVal.value)}
                               defaultValue={twitch}
                             />
                           </Field>
@@ -438,8 +396,7 @@ function App() {
                   </DialogBody>
                 </DialogSurface>
               </Dialog>
-              <ReactCanvasConfetti
-                ref={confettiRef}
+              {verifiedWinner === 2 && <Fireworks autorun={{ speed: 3 }} 
                 style={{
                   position: "fixed",
                   zIndex: 1000001,
@@ -449,7 +406,7 @@ function App() {
                   width: "100vw",
                   height: "100vh",
                 }}
-              />
+              />}
               <div
                 className="stack"
                 style={{
