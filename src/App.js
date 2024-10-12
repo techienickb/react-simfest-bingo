@@ -215,7 +215,13 @@ function App() {
         .then(() => {
           if (window.location.pathname !== "/admin") {
             connection.on("NewGame", () => {
-              alert("We are starting a new game");
+              if (Notification.permission === "granted")
+                new Notification("We are starting a new game");
+              else if (Notification.permission !== "denied")
+                Notification.requestPermission().then((permission) => {
+                  if (permission === "granted") new Notification("We are starting a new game");
+                  else alert("We are starting a new game");
+                });
               fillGrid();
             });
             connection.on("Winner", () => setVerified(2));
