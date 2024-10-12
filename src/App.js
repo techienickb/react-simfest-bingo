@@ -177,7 +177,7 @@ function App() {
   useEffect(() => {
     if (!connection) {
       const newConnection = new HubConnectionBuilder()
-        .withUrl("https://simfest-bingo-backend.azurewebsites.net/hub")
+        .withUrl("https://simfestbingobackend.azurewebsites.net/hub")
         .withAutomaticReconnect()
         .build();
       setConnection(newConnection);
