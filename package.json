@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-components": "^9.55.1",
-    "@microsoft/applicationinsights-react-js": "^17.3.3",
-    "@microsoft/applicationinsights-web": "^3.3.3",
+    "@microsoft/applicationinsights-react-js": "^17.3.4",
+    "@microsoft/applicationinsights-web": "^3.3.4",
     "@microsoft/signalr": "^8.0.7",
-    "@testing-library/jest-dom": "^6.6.2",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "react": "^18.3.1",
