@@ -107,7 +107,8 @@ const data = [
   "Balls ⚽",
   "A380 ✈️",
   "Checklist 📃",
-  "Landing score 🛬"
+  "Landing score 🛬",
+  "Monitoring matters"
 ].sort((a, b) => a.localeCompare(b));
 
 function App() {
